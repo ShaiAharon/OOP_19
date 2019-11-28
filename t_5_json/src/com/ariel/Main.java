@@ -17,16 +17,18 @@ public class Main {
 
 
 //        // Reading json object
-//        JsonObject jsonObject = new JsonObject();
-//        try {
-//            String json_str = new String(Files.readAllBytes(Paths.get(json_path)));
-//            jsonObject = JsonParser.parseString(json_str).getAsJsonObject();
-//
-//            System.out.println(jsonObject.toString().replace(",", "\n\t"));
-//            System.out.println(jsonObject.get("nick_name"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        JsonObject jsonObject = new JsonObject();
+        try {
+            String json_str = new String(
+                    Files.readAllBytes(Paths.get(json_path))
+            );
+            jsonObject = JsonParser.parseString(json_str).getAsJsonObject();
+
+            System.out.println(jsonObject.toString().replace(",", "\n\t"));
+            System.out.println(jsonObject.get("nick_name"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 //        // Create Json from ground-up
 //        JsonObject my_json = new JsonObject();
@@ -44,27 +46,29 @@ public class Main {
 //        my_json.add("companions", jsonArray);
 //        System.out.println(my_json.toString().replace(",", "\n\t"));
 
-        // Create Json from Object
-        Gson gson = new Gson();
-        String dr_json_str = gson.toJson(new DrWho());
-        System.out.println(dr_json_str.toString().replace(",", "\n\t"));
+//        // Create Json from Object
+//        Gson gson = new Gson();
+//        DrWho drwho = new DrWho();
+//        String dr_json_str = gson.toJson(drwho);
+//        System.out.println(dr_json_str.toString().replace(",", "\n\t"));
+//
+//        // Save the object to a file
+//        Path file = Paths.get("my_drwho.json");
+//        try {
+//            Files.write(file, Arrays.asList(dr_json_str), StandardCharsets.UTF_8);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        // Save the object to a file
-        Path file = Paths.get("my_drwho.json");
-        try {
-            Files.write(file, Arrays.asList(dr_json_str), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        // Load the json to an object
+//        try {
+//            String json_str = new String(Files.readAllBytes(file));
+//            DrWho loaded_dr = gson.fromJson(json_str, DrWho.class);
+//
+//            System.out.println(loaded_dr);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        // Load the json to an object
-        try {
-            String json_str = new String(Files.readAllBytes(file));
-            DrWho loaded_dr = gson.fromJson(json_str,DrWho.class);
-
-            System.out.println(loaded_dr);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
