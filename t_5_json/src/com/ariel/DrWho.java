@@ -10,7 +10,7 @@ public class DrWho {
     String type = "TimeLord";
     int doctor_num = 8;
     int heart_num = 2;
-    ArrayList<String> companions = new ArrayList<String>(
-            Arrays.asList("Grace Holloway"
+    ArrayList<companion> companions = new ArrayList<companion>(
+            Arrays.asList(new companion()
             ));
 }

@@ -15,8 +15,7 @@ public class Main {
     public static void main(String[] args) {
         final String json_path = "src/example.json";
 
-
-//        // Reading json object
+        // Reading json object
         JsonObject jsonObject = new JsonObject();
         try {
             String json_str = new String(
@@ -46,7 +45,7 @@ public class Main {
 //        my_json.add("companions", jsonArray);
 //        System.out.println(my_json.toString().replace(",", "\n\t"));
 
-//        // Create Json from Object
+        // Create Json from Object
 //        Gson gson = new Gson();
 //        DrWho drwho = new DrWho();
 //        String dr_json_str = gson.toJson(drwho);
@@ -59,7 +58,7 @@ public class Main {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-
+//
 //        // Load the json to an object
 //        try {
 //            String json_str = new String(Files.readAllBytes(file));

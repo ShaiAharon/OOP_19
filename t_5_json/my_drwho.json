@@ -5,7 +5,9 @@
   "doctor_num": 8,
   "heart_num": 2,
   "companions": [
-    "Grace Holloway"
-  ],
-  "newField":"new"
+    {
+      "name": "",
+      "age": -1
+    }
+  ]
 }
