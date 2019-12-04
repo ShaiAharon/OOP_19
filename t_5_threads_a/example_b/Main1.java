@@ -1,3 +1,7 @@
+/**
+ * Based on Yael Landau's code
+ */
+
 public class Main1 {
     public static void main(String[] args) throws InterruptedException {
         Counter c = new Counter();
