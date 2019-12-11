@@ -1,16 +1,21 @@
 package com.ariel.oop.t_5a;
 
 public class Spider implements Runnable {
-    int mSleep;
     int mTimes;
+    int mSleep;
 
-    Spider(int sleep, int times) {
-        mSleep = sleep;
+    Spider(int sleep,int times){
         mTimes = times;
+        mSleep = sleep;
+    }
+    @Override
+    public void run() {
+        print();
     }
 
-    public void print() {
-        for (int i = 0; i < mTimes; i++) {
+    private void print() {
+
+        for (int i=0;i<mTimes;++i){
             System.out.print("Spider - ");
 
             try {
@@ -19,10 +24,5 @@ public class Spider implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void run() {
-        print();
     }
 }

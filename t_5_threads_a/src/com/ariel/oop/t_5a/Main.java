@@ -20,13 +20,15 @@ public class Main {
         t1.start();
         t2.start();
 
-//        for (int i = 0; i < 100; ++i) {
-//            System.out.println("Does what a spider-man does!!");
-//        }
 //        try {
 //            t1.join();
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
+
+        for (int i = 0; i < 10; ++i) {
+            System.out.println("Does what a spider-man does!!");
+        }
+
     }
 }
