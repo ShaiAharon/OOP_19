@@ -7,14 +7,17 @@ public class Main
 		DataCenter data = new DataCenter();
 
 		Producer producer = new Producer(data);
+		Producer producer1 = new Producer(data);
+		Producer producer2 = new Producer(data);
+
 		Consumer consumer = new Consumer(data);
 		Consumer consumer1 = new Consumer(data);
 
 
 		Thread p1 = new Thread(producer);
-		Thread p2 = new Thread(producer);
-		Thread p3 = new Thread(producer);
-		
+		Thread p2 = new Thread(producer1);
+		Thread p3 = new Thread(producer2);
+
 		Thread c4 = new Thread(consumer);
 		Thread c5 = new Thread(consumer1);
 		

@@ -16,7 +16,7 @@ public class Consumer implements Runnable {
             String msg;
             try {
                 synchronized (data) {
-                    if (data.isEmpty()) {
+                    while (data.isEmpty()) {
                         System.out.println("Consumer- wait");
                         data.wait();
                     }
@@ -25,7 +25,7 @@ public class Consumer implements Runnable {
                     System.out.println("(" + con_serial + ") read msg: " + msg
                             + " Count: " + data.getCount());
                 }
-                Thread.sleep(100);
+                Thread.sleep(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
