@@ -13,7 +13,7 @@ public class Task implements Runnable {
             for (int i = 0; i <= 5; i++) {
                 System.out.println("Executing task: " + name);
 
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
 
             System.out.println(name + " complete");

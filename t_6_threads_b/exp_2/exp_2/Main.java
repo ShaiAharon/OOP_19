@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<Runnable> run_arr = new ArrayList<>();
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 15; ++i) {
            run_arr.add(new Task("task " + i));
         }
 

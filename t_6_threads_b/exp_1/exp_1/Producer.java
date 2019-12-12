@@ -12,15 +12,16 @@ public class Producer implements Runnable {
     public void run() {
         while (true) {
             try {
-                String msg = "" + counterMsg++;
                 synchronized (data) {
-					while (data.isFull()) {
-						data.wait();
-					}
-					data.setMsg(msg);
-					data.notifyAll();
-					Thread.sleep(0);
-				}
+                    while (data.isFull()) {
+                        System.out.println("Producer- wait");
+                        data.wait();
+                    }
+                    String msg = "" + counterMsg++;
+                    data.setMsg(msg);
+                    data.notifyAll();
+                }
+              Thread.sleep(10);
             } catch (InterruptedException e) {
                 System.out.println("Somthing went wrong");
             }
