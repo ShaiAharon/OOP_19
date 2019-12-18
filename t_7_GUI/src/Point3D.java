@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Point3D implements Serializable
 {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -61,6 +61,9 @@ public class Point3D implements Serializable
     public double x() {return _x;}
     public double y() {return _y;}
     public double z() {return _z;}
+    public void setX(double x){_x = x;}
+    public void setY(double y){_y = y;}
+    public void setZ(double z){_z = z;}
     public int ix() {return (int)_x;}
     public int iy() {return (int)_y;}
     public int iz() {return (int)_z;}
