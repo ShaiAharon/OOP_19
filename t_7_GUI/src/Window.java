@@ -10,8 +10,9 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener, MouseListener, MouseMotionListener {
     LinkedList<Point3D> mPoints = new LinkedList<Point3D>();
-    Point3D mPivot_point = new Point3D(0, 0, 0);
+    Point3D mPivot_point = null;
     boolean mDraw_pivot = false;
+    boolean mMoving_point = false;
     private int kRADIUS = 5;
 
     public Window() {
@@ -40,6 +41,7 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
         this.addMouseMotionListener(this);
     }
 
+
     public void paint(Graphics g) {
         super.paint(g);
 
@@ -47,32 +49,37 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
 
         for (Point3D p : mPoints) {
             g.setColor(Color.BLUE);
-            g.fillOval((int) p.x(), (int) p.y(), 2 * kRADIUS, 2 * kRADIUS);
+            g.fillOval((int) p.x() - kRADIUS, (int) p.y() - kRADIUS,
+                    2 * kRADIUS, 2 * kRADIUS);
 
             if (prev != null) {
                 g.setColor(Color.RED);
-                g.drawLine((int) p.x() + kRADIUS, (int) p.y() + kRADIUS,
-                        (int) prev.x() + kRADIUS, (int) prev.y() + kRADIUS);
+                g.drawLine((int) p.x(), (int) p.y(),
+                        (int) prev.x(), (int) prev.y());
 
-				double dist = prev.distance3D(p);
-				g.drawString(String.format("%.2f", dist), (int) ((p.x() + prev.x()) / 2), (int) ((p.y() + prev.y()) / 2));
+                double dist = prev.distance3D(p);
+                g.drawString(String.format("%.2f", dist),
+                        (int) ((p.x() + prev.x()) / 2),
+                        (int) ((p.y() + prev.y()) / 2));
             }
 
             prev = p;
         }
 
-        if (mDraw_pivot) {
+        if (mDraw_pivot
+                && !mMoving_point) {
+            g.setColor(Color.BLUE);
+            g.fillOval((int) mPivot_point.x() - kRADIUS, (int) mPivot_point.y() - kRADIUS,
+                    2 * kRADIUS, 2 * kRADIUS);
             if (prev != null) {
                 g.setColor(Color.RED);
-                g.drawLine((int) mPivot_point.x() + kRADIUS, (int) mPivot_point.y() + kRADIUS,
-                        (int) prev.x() + kRADIUS, (int) prev.y() + kRADIUS);
+                g.drawLine((int) mPivot_point.x(), (int) mPivot_point.y(),
+                        (int) prev.x(), (int) prev.y());
 
-				double dist = prev.distance3D(mPivot_point);
+                double dist = prev.distance3D(mPivot_point);
                 g.drawString(String.format("%.2f", dist), (int) ((mPivot_point.x() + prev.x()) / 2), (int) ((mPivot_point.y() + prev.y()) / 2));
             }
 
-            g.setColor(Color.BLUE);
-            g.fillOval((int) mPivot_point.x(), (int) mPivot_point.y(), 2 * kRADIUS, 2 * kRADIUS);
         }
     }
 
@@ -108,9 +115,23 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        mPivot_point = new Point3D(x, y);
-        mDraw_pivot = true;
+        Point3D tmp = new Point3D(x, y);
+        int min_dist = (int) (kRADIUS * 1.5);
+        double best_dist = 1000000;
+        for (Point3D p : mPoints) {
+            double dist = tmp.distance3D(p);
+            if (dist < min_dist
+                    && dist < best_dist) {
+                mPivot_point = p;
+                best_dist = dist;
+                mMoving_point = true;
+            }
+        }
 
+        if (mPivot_point == null) {
+            mPivot_point = new Point3D(x, y);
+        }
+        mDraw_pivot = true;
         repaint();
         System.out.println("mousePressed");
     }
@@ -118,7 +139,11 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
     @Override
     public void mouseReleased(MouseEvent e) {
         System.out.println("mouseReleased");
-        mPoints.add(new Point3D(mPivot_point));
+        if (!mMoving_point) {
+            mPoints.add(new Point3D(mPivot_point));
+        }
+        mMoving_point = false;
+        mPivot_point = null;
         mDraw_pivot = false;
     }
 
