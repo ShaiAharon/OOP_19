@@ -116,7 +116,7 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
         int x = e.getX();
         int y = e.getY();
         Point3D tmp = new Point3D(x, y);
-        int min_dist = (int) (kRADIUS * 1.5);
+        int min_dist = (int) (kRADIUS * 1.);
         double best_dist = 1000000;
         for (Point3D p : mPoints) {
             double dist = tmp.distance3D(p);
@@ -129,7 +129,7 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
         }
 
         if (mPivot_point == null) {
-            mPivot_point = new Point3D(x, y);
+            mPivot_point = tmp;
         }
         mDraw_pivot = true;
         repaint();
