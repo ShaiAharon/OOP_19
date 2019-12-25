@@ -32,4 +32,28 @@ public class GenericSuperHero<T> implements GenericInterface<String, Double> {
     public Double doSomeOtherCoolThing() {
         return (mT.toString()).length() * Math.PI;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        return this.mT == ((GenericSuperHero<T>) obj).mT;
+    }
+
+    static public <T> String genericStaticMethod(T[] sh_list, T pivot_sh) {
+        int count = 0;
+        if (pivot_sh == null) {
+            for (T t : sh_list) {
+                count += (t == null) ? 1 : 0;
+            }
+        } else {
+            for (T t : sh_list) {
+                count += (t.equals(pivot_sh)) ? 1 : 0;
+            }
+        }
+
+        return count + " instances of <" + pivot_sh + "> where found";
+    }
 }
