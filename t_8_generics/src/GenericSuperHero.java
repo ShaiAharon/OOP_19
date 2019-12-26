@@ -20,7 +20,7 @@ public class GenericSuperHero<T> implements GenericInterface<String, Double> {
 
     @Override
     public String doSomeThingCool() {
-        return "  \\ | /  \n" +
+        return "\n  \\ | /  \n" +
                 "   \\*/   \n" +
                 "--**O**-- \n" +
                 "   /*\\\n" +
@@ -42,14 +42,14 @@ public class GenericSuperHero<T> implements GenericInterface<String, Double> {
         return this.mT == ((GenericSuperHero<T>) obj).mT;
     }
 
-    static public <T> String genericStaticMethod(T[] sh_list, T pivot_sh) {
+    static public <I> String genericStaticMethod(I[] sh_list, I pivot_sh) {
         int count = 0;
         if (pivot_sh == null) {
-            for (T t : sh_list) {
+            for (I t : sh_list) {
                 count += (t == null) ? 1 : 0;
             }
         } else {
-            for (T t : sh_list) {
+            for (I t : sh_list) {
                 count += (t.equals(pivot_sh)) ? 1 : 0;
             }
         }

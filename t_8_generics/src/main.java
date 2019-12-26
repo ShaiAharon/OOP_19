@@ -29,9 +29,10 @@ public class main {
 //        System.out.println("Something Cool:\n\t" + myGen.doSomeThingCool());
 //        System.out.println("Some other Cool thing:\n\t" + myGen.doSomeOtherCoolThing());
 
-//        // Generic method
-//        Integer[] int_lst = {1, 2, 3, 51, 2, 3, 12, 3, 1, 2, 4, 21};
-//        System.out.println("Count:\n\t" + GenericSuperHero.genericStaticMethod(int_lst, 1));
+        // Generic method
+        Integer[] int_lst = {1, 2, 3, 51, 2, 3, 12, 3, 1, 2, 4, 21};
+        System.out.println("Count:\n\t"
+                + GenericSuperHero.<Integer>genericStaticMethod(int_lst, 1));
 //
 //        GenericSuperHero<String>[] gsh_lst = new GenericSuperHero[10];
 //        Random rand = new Random();
