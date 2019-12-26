@@ -1,21 +1,24 @@
 import java.util.ArrayList;
 
 public class SecretSociety {
+    private static String mClassName = "secretSociety";
+    private static int mInstCounter = 0;
     private String mName;
-    private ArrayList<SecreteMember> mMembers = new ArrayList<>();
+    private ArrayList<secretMember> mMembers = new ArrayList<>();
+    private int mId = 0;
 
-    private class SecreteMember {
+    private class secretMember {
         private String mName;
         private String mCodename;
 
-        SecreteMember(String name, String codename) {
+        secretMember(String name, String codename) {
             mName = name;
             mCodename = codename;
         }
 
         @Override
         public String toString() {
-            return "SecreteMember{" +
+            return "secretMember{" +
                     "\n\t\tmName='" + mName +
                     ", tmCodename='" + mCodename +
                     "\n\t\tAll Hail '" + SecretSociety.this.mName + "'" +
@@ -24,11 +27,14 @@ public class SecretSociety {
     }
 
     SecretSociety(String name) {
+        mInstCounter += 1;
         mName = name;
     }
 
     public void addMember(String new_member) {
-        mMembers.add(new SecreteMember(new_member, "Secrete Dude #" + mMembers.size()));
+        mMembers.add(new secretMember(
+                new_member,
+                "secrete Dude #" + mId++));
 
         System.out.println("Welcome " + new_member);
         System.out.println("\tOne Of Us!");
@@ -36,9 +42,10 @@ public class SecretSociety {
         System.out.println("\tOne Of Us!");
     }
 
-    public void addSuperSecreteMember(final String new_member) {
+
+    public void addSuperSecretMember(String new_member) {
         mMembers.add(
-                new SecreteMember(new_member, "") {
+                new secretMember(new_member, "") {
                     @Override
                     public String toString() {
                         return "Shhhhhh....";
@@ -54,13 +61,13 @@ public class SecretSociety {
 
     @Override
     public String toString() {
-        return "SecretSociety{" +
+        return "secretSociety{" +
                 "\n\t\tmName=" + mName +
                 "\n\t\tmMembers=" + mMembers +
                 "\n\t}";
     }
 
-    public static String getSlogen(){
-        return "Secrete but cool";
+    public static String getSlogen() {
+        return "secrete but cool " + mInstCounter;
     }
 }
