@@ -1,8 +1,4 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
 
@@ -76,7 +72,13 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
                 g.drawLine((int) mPivot_point.x(), (int) mPivot_point.y(),
                         (int) prev.x(), (int) prev.y());
 
-                double dist = prev.distance3D(mPivot_point);
+
+                float dist = (float)prev.distance3D(mPivot_point);
+                float font_size = (float) Math.max(10.0f, Math.pow(dist,1.5f) / 100);
+                font_size = Math.min(40.0f, font_size);
+
+                Font font = g.getFont().deriveFont(font_size);
+                g.setFont(font);
                 g.drawString(String.format("%.2f", dist), (int) ((mPivot_point.x() + prev.x()) / 2), (int) ((mPivot_point.y() + prev.y()) / 2));
             }
 
@@ -145,6 +147,8 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
         mMoving_point = false;
         mPivot_point = null;
         mDraw_pivot = false;
+
+        repaint();
     }
 
     @Override
