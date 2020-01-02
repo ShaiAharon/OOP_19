@@ -21,3 +21,5 @@ Covering:
 - [t_7_GUI](https://github.com/ShaiAharon/OOP_19/tree/master/t_7_GUI/src) - Java GUI example using [_JFrame_](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JFrame.html) . Basic GUI and Mouse listeners
 - [ht_8_generics](https://github.com/ShaiAharon/OOP_19/tree/master/t_8_generics) - Java Generics
 - [t_8_inner_class](https://github.com/ShaiAharon/OOP_19/tree/master/t_8_inner_class) - Java Inner Class
+- [t_9_sql](https://github.com/ShaiAharon/OOP_19/tree/master/t_9_sql) - SQLite with java
+- [t_9_reflection](https://github.com/ShaiAharon/OOP_19/tree/master/t_9_reflection) - Java reflection
