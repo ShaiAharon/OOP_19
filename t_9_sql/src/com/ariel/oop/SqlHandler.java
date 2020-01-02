@@ -146,4 +146,21 @@ public class SqlHandler {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Empty a tables content from the database
+     * @param table_name The table to delete
+     */
+    public void truncateTable(String table_name){
+        String sql = String.format("TRUNCATE TABLE %s;",table_name);
+
+        try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+            System.out.println(String.format("Cleared <%s> contents.",table_name));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

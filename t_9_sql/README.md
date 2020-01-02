@@ -8,4 +8,4 @@ In this project, we explore a little bit SQL through **SQLite**
 -   Adding/removing data to the table
 -   Searching for data (SEARCH)
 
-![xkcd.com](exploits_of_a_mom.png)
+![https://xkcd.com/327/](exploits_of_a_mom.png "Her daughter is named Help I'm trapped in a driver's license factory.")

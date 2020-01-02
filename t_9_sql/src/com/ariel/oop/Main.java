@@ -69,15 +69,15 @@ public class Main {
     public static void main(String[] args) {
         String database_name = "StarFleet";
         // Part 1: Basics
-//        Connection conn = connect(database_name);
+        Connection conn = connect(database_name);
 //
 //        createNewDatabase(conn);
 //        createNewTable(conn);
 
         // Part 2: Insert, extract and delete data
-        SqlHandler sql_h = new SqlHandler(database_name);
-
-        sql_h.printShips();
+//        SqlHandler sql_h = new SqlHandler(database_name);
+//
+//        sql_h.printShips();
 //        sql_h.insertShipData(
 //                "USS Enterprise",
 //                "Warp 5 prototype/long range cruiser",
@@ -94,5 +94,6 @@ public class Main {
 //
 //        sql_h.printShips();
 //        sql_h.deleteTable("ships");
+//        sql_h.truncateTable("ships");
     }
 }
