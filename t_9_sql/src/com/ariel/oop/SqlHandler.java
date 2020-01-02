@@ -46,9 +46,21 @@ public class SqlHandler {
 
     /**
      * Get the max ship id
+     *
+     * @return the last id (INT)
      */
     public int getLastId() {
-        String sql = "SELECT MAX(id) FROM ships";
+        return getLastId("ships");
+    }
+
+    /**
+     * Get max id from a table
+     *
+     * @param table_str the table name
+     * @return the last id (INT)
+     */
+    public int getLastId(String table_str) {
+        String sql = "SELECT MAX(id) FROM " + table_str;
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
@@ -57,8 +69,8 @@ public class SqlHandler {
             int ret_id = 0;
             while (rs.next()) {
                 ret_id = rs.getInt(1);
+                return ret_id;
             }
-            return ret_id;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -80,8 +92,6 @@ public class SqlHandler {
                 System.out.println(
                         "Id:\t" + rs.getString(2)
                                 + "\n\tName:\t" + rs.getString(1)
-//                                + "\n\tType:\t" + rs.getString(3)
-//                                + "\n\tClass:\t" + rs.getString(4)
                 );
             }
         } catch (SQLException e) {
@@ -165,6 +175,97 @@ public class SqlHandler {
             System.out.println(String.format("Cleared <%s> contents.", table_name));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Adds another ship to the database
+     *
+     * @param name Ship name
+     */
+    public void insertPassengerData(String name, int ship_id) {
+        String sql = "INSERT INTO passengers(id,name,ship_id) VALUES(?,?,?)";
+        int next_id = getLastId("passengers") + 1;
+        try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
+            pstmt.setString(2, name);
+            pstmt.setInt(1, next_id);
+            pstmt.setInt(3, ship_id);
+            pstmt.executeUpdate();
+
+            System.out.println("Added new passenger.");
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Create a Passengers table and adds entries
+     */
+    public void createAndFillPassengers() {
+        String sql = "CREATE TABLE IF NOT EXISTS passengers(\n"
+                + "    id INTEGER PRIMARY KEY,\n"
+                + "    name TEXT NOT NULL,\n"
+                + "    ship_id INTEGER NOT NULL"
+                + ");";
+
+        try (Statement stmt = mConn.createStatement()
+        ) {
+            stmt.execute(sql);
+
+            insertPassengerData("Yossi", 1);
+            insertPassengerData("Captian Picard", 1);
+            insertPassengerData("Mr. Data", 2);
+            insertPassengerData("Dr. McCoy", 2);
+
+            System.out.println("Added and filled Passengers table");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Prints the Passengers table
+     */
+    public void printTablePassengers() {
+        String sql = "SELECT id,name,ship_id " +
+                "FROM passengers";
+
+        try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(
+                        "Id:\t" + rs.getString(1)
+                                + "\n\tName:\t" + rs.getString(2)
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Print the passengers onboard a ship by ship id
+     * @param ship_id ship ID
+     */
+    public void printPassengersByShip(int ship_id) {
+        String sql = "SELECT passengers.id,passengers.name,ships.name " +
+                "FROM ships,passengers " +
+                "WHERE ships.id=passengers.ship_id AND ships.id=" + ship_id;
+
+        try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(
+                        "Pass. Name:\t("+rs.getString(1)+") " + rs.getString(2)
+                                + "\n\tShip Name:\t" + rs.getString(3)
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

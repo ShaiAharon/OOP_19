@@ -19,7 +19,6 @@ public class Main {
             conn = DriverManager.getConnection(url);
 
             System.out.println("Connection to SQLite has been established.");
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
@@ -70,13 +69,13 @@ public class Main {
         String database_name = "StarFleet";
         // Part 1: Basics
         Connection conn = connect(database_name);
-//
-//        createNewDatabase(conn);
+
+        createNewDatabase(conn);
         createNewTable(conn);
 
         // Part 2: Insert, extract and delete data
         SqlHandler sql_h = new SqlHandler(database_name);
-//
+
         sql_h.printShips();
         sql_h.insertShipData(
                 "USS Enterprise",
@@ -90,10 +89,15 @@ public class Main {
                 "Ares Class prototype"
         );
 
-//        sql_h.deleteShipById(3);
-//
-        sql_h.truncateTable("ships");
+        sql_h.deleteShipById(3);
+
+//        sql_h.truncateTable("ships");
 //        sql_h.deleteTable("ships");
         sql_h.printShips();
+
+        // Part 3: Advanced SELECT
+        sql_h.createAndFillPassengers();
+//        sql_h.printTablePassengers();
+        sql_h.printPassengersByShip(1);
     }
 }
