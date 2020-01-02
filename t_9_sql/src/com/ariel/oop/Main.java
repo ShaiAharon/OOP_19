@@ -72,28 +72,28 @@ public class Main {
         Connection conn = connect(database_name);
 //
 //        createNewDatabase(conn);
-//        createNewTable(conn);
+        createNewTable(conn);
 
         // Part 2: Insert, extract and delete data
-//        SqlHandler sql_h = new SqlHandler(database_name);
+        SqlHandler sql_h = new SqlHandler(database_name);
 //
-//        sql_h.printShips();
-//        sql_h.insertShipData(
-//                "USS Enterprise",
-//                "Warp 5 prototype/long range cruiser",
-//                "Naval Experimental (NX)"
-//                );
-//
-//        sql_h.insertShipData(
-//                "USS Ares",
-//                "Battle Cruiser",
-//                "Ares Class prototype"
-//        );
-//
+        sql_h.printShips();
+        sql_h.insertShipData(
+                "USS Enterprise",
+                "Warp 5 prototype/long range cruiser",
+                "Naval Experimental (NX)"
+                );
+
+        sql_h.insertShipData(
+                "USS Ares",
+                "Battle Cruiser",
+                "Ares Class prototype"
+        );
+
 //        sql_h.deleteShipById(3);
 //
-//        sql_h.printShips();
+        sql_h.truncateTable("ships");
 //        sql_h.deleteTable("ships");
-//        sql_h.truncateTable("ships");
+        sql_h.printShips();
     }
 }

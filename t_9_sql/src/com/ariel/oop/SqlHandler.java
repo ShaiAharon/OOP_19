@@ -13,6 +13,7 @@ public class SqlHandler {
 
     /**
      * Connects to the SQL database
+     *
      * @param db_path the path to the database
      * @return The connection object
      */
@@ -47,8 +48,7 @@ public class SqlHandler {
      * Get the max ship id
      */
     public int getLastId() {
-        String sql = "SELECT MAX(id) "
-                + "FROM ships";
+        String sql = "SELECT MAX(id) FROM ships";
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
@@ -57,8 +57,8 @@ public class SqlHandler {
             int ret_id = 0;
             while (rs.next()) {
                 ret_id = rs.getInt(1);
-                return ret_id;
             }
+            return ret_id;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
@@ -69,8 +69,8 @@ public class SqlHandler {
      * Prints all the ships
      */
     public void printShips() {
-        String sql = "SELECT name,id,type,class "
-                + "FROM ships";
+        String sql = "SELECT name,id " +
+                "FROM ships";
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
@@ -78,10 +78,10 @@ public class SqlHandler {
             // loop through the result set
             while (rs.next()) {
                 System.out.println(
-                        "Id:\t"+rs.getInt(2)
-                        +"\n\tName:\t"+rs.getString(1)
-                        +"\n\tType:\t"+rs.getString(3)
-                        +"\n\tClass:\t"+rs.getString(4)
+                        "Id:\t" + rs.getString(2)
+                                + "\n\tName:\t" + rs.getString(1)
+//                                + "\n\tType:\t" + rs.getString(3)
+//                                + "\n\tClass:\t" + rs.getString(4)
                 );
             }
         } catch (SQLException e) {
@@ -91,8 +91,9 @@ public class SqlHandler {
 
     /**
      * Adds another ship to the database
-     * @param name Ship name
-     * @param type Ship type
+     *
+     * @param name      Ship name
+     * @param type      Ship type
      * @param class_str Ship class
      */
     public void insertShipData(String name, String type, String class_str) {
@@ -113,9 +114,10 @@ public class SqlHandler {
 
     /**
      * Deletes ship by ID
+     *
      * @param ship_id Ships ID
      */
-    public void deleteShipById(int ship_id){
+    public void deleteShipById(int ship_id) {
         String sql = "DELETE FROM ships WHERE id = ?";
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
@@ -132,16 +134,17 @@ public class SqlHandler {
 
     /**
      * Delete a table from the database
+     *
      * @param table_name The table to delete
      */
-    public void deleteTable(String table_name){
-        String sql = String.format("DROP TABLE %s;",table_name);
+    public void deleteTable(String table_name) {
+        String sql = String.format("DROP TABLE %s;", table_name);
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
             // execute the delete statement
             pstmt.executeUpdate();
 
-            System.out.println(String.format("Deleted <%s> table.",table_name));
+            System.out.println(String.format("Deleted <%s> table.", table_name));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -149,16 +152,17 @@ public class SqlHandler {
 
     /**
      * Empty a tables content from the database
+     *
      * @param table_name The table to delete
      */
-    public void truncateTable(String table_name){
-        String sql = String.format("TRUNCATE TABLE %s;",table_name);
+    public void truncateTable(String table_name) {
+        String sql = String.format("DELETE FROM %s;", table_name);
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
             // execute the delete statement
             pstmt.executeUpdate();
 
-            System.out.println(String.format("Cleared <%s> contents.",table_name));
+            System.out.println(String.format("Cleared <%s> contents.", table_name));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

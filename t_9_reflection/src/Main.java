@@ -9,7 +9,7 @@ public class Main {
             Test obj = new Test();
             Class cls = obj.getClass();
 
-            System.out.println("The name of class is " + cls.getName());
+//            System.out.println("The name of class is " + cls.getName());
 
 //            System.out.println("Class Methods:");
 //            Method[] methods = cls.getMethods();
@@ -29,10 +29,10 @@ public class Main {
 //            field.set(obj, "JAVA");
 //            methodcall2.invoke(obj);
 
-//            System.out.println("Accessing private method");
-//            Method methodcall3 = cls.getDeclaredMethod("method3");
-//            methodcall3.setAccessible(true);
-//            methodcall3.invoke(obj);
+            System.out.println("Accessing private method");
+            Method methodcall3 = cls.getDeclaredMethod("method3");
+            methodcall3.setAccessible(true);
+            methodcall3.invoke(obj);
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
