@@ -119,13 +119,29 @@ public class SqlHandler {
         String sql = "DELETE FROM ships WHERE id = ?";
 
         try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
-
             // set the corresponding param
             pstmt.setInt(1, ship_id);
             // execute the delete statement
             pstmt.executeUpdate();
 
             System.out.println("Ship retired");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Delete a table from the database
+     * @param table_name The table to delete
+     */
+    public void deleteTable(String table_name){
+        String sql = String.format("DROP TABLE %s;",table_name);
+
+        try (PreparedStatement pstmt = mConn.prepareStatement(sql)) {
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+            System.out.println(String.format("Deleted <%s> table.",table_name));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
