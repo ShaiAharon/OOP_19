@@ -10,13 +10,17 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
     boolean mDraw_pivot = false;
     boolean mMoving_point = false;
     private int kRADIUS = 5;
+    private int mWin_h = 500;
+    private int mWin_w = 500;
+    private Image mBuffer_image;
+    private Graphics mBuffer_graphics;
 
     public Window() {
         initGUI();
     }
 
     private void initGUI() {
-        this.setSize(500, 500);
+        this.setSize(mWin_h, mWin_w);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         MenuBar menuBar = new MenuBar();
@@ -37,10 +41,8 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
         this.addMouseMotionListener(this);
     }
 
-
-    public void paint(Graphics g) {
-        super.paint(g);
-
+    @Override
+    public void paintComponents(Graphics g) {
         Point3D prev = null;
 
         for (Point3D p : mPoints) {
@@ -83,6 +85,18 @@ public class Window extends JFrame implements ActionListener, MouseListener, Mou
             }
 
         }
+    }
+
+    public void paint(Graphics g) {
+        // Create a new "canvas"
+        mBuffer_image = createImage(mWin_w,mWin_h );
+        mBuffer_graphics = mBuffer_image.getGraphics();
+
+        // Draw on the new "canvas"
+        paintComponents(mBuffer_graphics);
+
+        // "Switch" the old "canvas" for the new one
+        g.drawImage(mBuffer_image, 0, 0, this);
     }
 
 
