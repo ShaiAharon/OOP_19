@@ -1,7 +1,6 @@
 // Java program implementing Singleton class 
 // with getInstance() method 
 class Multitone {
-    // static variable single_instance of type Singleton
     private static int sId = 0;
 
     // variable of type String 

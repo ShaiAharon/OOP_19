@@ -1,16 +1,16 @@
-// Driver Class 
+// Driver Class
 class Main
 {
     public static void main(String args[])
     {
         // instantiating a class with variable x
-        Multitone x = Multitone.getInstance();
+        Singleton x = Singleton.getInstance();
 
         // instantiating a class with variable y
-        Multitone y = Multitone.getInstance();
+        Singleton y = Singleton.getInstance();
 
         // instantiating a class with variable z
-        Multitone z = Multitone.getInstance();
+        Singleton z = Singleton.getInstance();
 
         // changing variable of instance x 
         x.s = (x.s).toUpperCase();
